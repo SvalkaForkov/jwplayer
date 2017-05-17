@@ -228,9 +228,10 @@ define([
                 this.set('flashBlocked', false);
             }
 
+            var presetPlaybackRate;
             // If there is no current provider, then the video tag might have a preset playback rate...
             if (!_provider) {
-                this.set('defaultPlaybackRate', _currentProvider.getPlaybackRate());
+                presetPlaybackRate = _currentProvider.getPlaybackRate();
             }
 
             _provider = _currentProvider;
