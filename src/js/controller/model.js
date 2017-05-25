@@ -219,6 +219,8 @@ define([
                 this.once('change:mediaContainer', this.onMediaContainer);
             }
 
+            _provider = _currentProvider;
+
             this.set('provider', _currentProvider.getName());
 
             if (_currentProvider.getName().name.indexOf('flash') === -1) {
@@ -226,7 +228,6 @@ define([
                 this.set('flashBlocked', false);
             }
 
-            _provider = _currentProvider;
             _provider.volume(_this.get('volume'));
 
             // Mute the video if autostarting on mobile. Otherwise, honor the model's mute value
@@ -234,7 +235,6 @@ define([
 
             // Attempt setting the playback rate to be the user selected value
             this.setPlaybackRate(this.get('defaultPlaybackRate'));
-            this.setPlaybackRatesAvailable();
 
             _provider.on('all', _videoEventHandler, this);
 
@@ -396,7 +396,6 @@ define([
             if (streamType === 'LIVE') {
                 this.setPlaybackRate(1);
             }
-            this.setPlaybackRatesAvailable();
         };
 
         this.setPlaybackRate = function(playbackRate) {
@@ -415,15 +414,6 @@ define([
             if (_provider) {
                 _provider.setPlaybackRate(clampedRate);
             }
-        };
-
-        this.setPlaybackRatesAvailable = function() {
-            var supportsPlaybackRates =
-                this.get('playbackRateControls') &&
-                _provider.supportsPlaybackRate &&
-                this.get('streamType') !== 'LIVE';
-
-            this.set('playbackRatesAvailable', supportsPlaybackRates);
         };
 
         // The model is also the mediaController for now
