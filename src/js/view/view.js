@@ -731,8 +731,8 @@ define([
 
             if (fullscreenState && _controls) {
                 // When going into fullscreen, we want the control bar to fade after a few seconds
-                    _controls.userActive();
-                }
+                _controls.userActive();
+            }
 
             _resizeMedia();
             _responsiveListener();
